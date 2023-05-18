@@ -1,4 +1,10 @@
+import {v4 as uuidv4} from 'uuid';
+import exp from "constants";
+
+
 export default class Character {
+
+    readonly id: string = uuidv4()
 
     readonly characterName: string = "";
     readonly playerName: string = "";
@@ -58,6 +64,9 @@ export default class Character {
     readonly selfControl: number = 0;
     readonly courage: number = 0;
 
+    readonly merits: Merit[] = [];
+    readonly flaws: Flaw[] = [];
+
 
 }
 
@@ -86,6 +95,16 @@ export enum DisciplineName {
     Vicissitude = "Vicissitude",
 }
 
+export interface Merit {
+    name: MeritName;
+    cost: number;
+}
+
+export interface Flaw {
+    name: FlawName;
+    cost: number;
+}
+
 export enum BackgroundName {
     Allies = "Allies",
     AlternateIdentity = "Alternate Identity",
@@ -100,4 +119,36 @@ export enum BackgroundName {
     Resources = "Resources",
     Retainers = "Retainers",
     Status = "Status"
+}
+
+export enum MeritName {
+    AcuteSense = "Acute Sense",
+    Ambidextrous = "Ambidextrous",
+    BlushOfHealth = "Blush of Health",
+    EatFood = "Eat Food",
+    EnchantingVoice = "Enchanting Voice",
+    FriendlyFace = "Friendly Face",
+    IronWill = "Iron Will",
+    NaturalLearner = "Natural Learner",
+    NaturalLinguist = "Natural Linguist",
+    NightVision = "Night Vision",
+    PerfectBalance = "Perfect Balance",
+    SanguinaryAnimism = "Sanguinary Animism",
+    SmallFrame = "Small Frame",
+    TrueFaith = "True Faith",
+    Unbondable = "Unbondable",
+    Unyielding = "Unyielding",
+    Blase = "Blase",
+    CodeOfHonor = "Code of Honor"
+}
+
+export enum FlawName {
+    Addiction = "Addiction",
+    Amnesia = "Amnesia",
+    Anachronism = "Anachronism",
+    Archaic = "Archaic",
+    AwkwardGesture = "Awkward Gesture",
+    BadSight = "Bad Sight",
+    Beconing = "Beconing",
+    BitterTaste = "Bitter Taste"
 }
