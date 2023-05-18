@@ -25,7 +25,7 @@ jobs:
       - name: build app
         run: npm run build
         env:
-          PUBLIC_URL: /
+          PUBLIC_URL: /vtmsheet
       - name: upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
