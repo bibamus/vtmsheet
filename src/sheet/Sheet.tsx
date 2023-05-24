@@ -1,17 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Character, {
-    Background,
-    BackgroundName,
-    Discipline,
-    DisciplineName,
-    Flaw,
-    FlawName,
-    Merit,
-    MeritName
-} from "../model/Character";
-import DotEntryWithLabel from "./DotEntryWithLabel";
-import {capitalizeFirstLetter} from "../Helper";
+import Character, {Background, BackgroundName, Discipline, Flaw, Merit} from "../model/Character";
 import DotEntry from "./DotEntry";
+import MeritsAndFlawsBlock from "./MeritsAndFlawsBlock";
+import DisciplineBlock from "./DisciplineBlock";
+import PropertyBlock from "./PropertyBlock";
 
 export default function Sheet(): React.ReactElement {
 
@@ -21,37 +13,6 @@ export default function Sheet(): React.ReactElement {
     useEffect(() => {
         console.log(JSON.stringify(character));
     }, [character]);
-
-
-    function createPropertyBlock(label: string, properties: (keyof Character)[]): React.ReactElement {
-        return <div>
-            <h3 className="property-block-heading">{label}</h3>,
-            {
-                properties.map(property => <DotEntryWithLabel key={property} label={capitalizeFirstLetter(property)}
-                                                              maxValue={5}
-                                                              currValue={character[property] as number}
-                                                              setFunction={(value) => setCharacterProperty(property, value)}
-                />)
-            }
-        </div>;
-    }
-
-
-    function createDisciplineEntry(index: number): React.ReactElement {
-        let discipline = character.disciplines[index];
-        return <div key={index} className="labeled-entry">
-            <select className="label" defaultValue="" value={discipline?.name}
-                    onChange={(choice) => updateCharacterArrayProperty<Discipline>("disciplines", index, {name: choice.currentTarget.value as DisciplineName})}>
-                <option></option>
-                {
-                    Object.values(DisciplineName).map(value => <option key={value}>{value}</option>)
-                }
-            </select>
-            <DotEntry disabled={discipline?.name == null} maxValue={5} currValue={discipline?.level ?? 0}
-                      setFunction={value => updateCharacterArrayProperty<Discipline>("disciplines", index, {level: value})}/>
-        </div>
-
-    }
 
     function createBackgroundEntry(index: number): React.ReactElement {
         let background = character.backgrounds[index];
@@ -66,14 +27,6 @@ export default function Sheet(): React.ReactElement {
             <DotEntry disabled={background?.name == null} maxValue={5} currValue={background?.level ?? 0}
                       setFunction={value => updateCharacterArrayProperty<Background>("backgrounds", index, {level: value})}/>
         </div>
-    }
-
-    function createDisciplineBlock(): React.ReactElement {
-        return <div>
-            <h3 className="property-block-heading">Disciplines</h3>
-            {Array.from(Array(5).keys()).map(index => createDisciplineEntry(index))}
-        </div>
-
     }
 
 
@@ -97,55 +50,6 @@ export default function Sheet(): React.ReactElement {
         </div>
     }
 
-    function createMeritEntry(index: number): React.ReactElement {
-        let merit = character.merits[index];
-        return <div key={index} className="labeled-entry">
-            <select className="label" defaultValue="" value={merit?.name}
-                    onChange={(choice) => updateCharacterArrayProperty<Merit>("merits", index, {name: choice.currentTarget.value as MeritName})}
-            >
-                <option></option>
-                {
-                    Object.values(MeritName).map(value => <option key={value}>{value}</option>)
-                }
-            </select>
-            <select className="label" defaultValue="" value={merit?.cost ?? 0}
-                    onChange={(choice) => updateCharacterArrayProperty<Merit>("merits", index, {cost: parseInt(choice.currentTarget.value)})}
-            >
-                <option></option>
-                {Array.from(Array(7).keys()).map(index => <option>{index + 1}</option>)}
-            </select>
-        </div>
-    }
-
-    function createFlawEntry(index: number) {
-        let flaw = character.flaws[index];
-        return <div key={index} className="labeled-entry">
-            <select className="label" defaultValue="" value={flaw?.name}
-                    onChange={(choice) => updateCharacterArrayProperty<Flaw>("flaws", index, {name: choice.currentTarget.value as FlawName})}
-            >
-                <option></option>
-                {
-                    Object.values(FlawName).map(value => <option key={value}>{value}</option>)
-                }
-            </select>
-            <select className="label"
-                    onChange={(choice) => updateCharacterArrayProperty<Flaw>("flaws", index, {cost: parseInt(choice.currentTarget.value)})}
-                    defaultValue="" value={flaw?.cost ?? 0}
-            >
-                <option></option>
-                {Array.from(Array(7).keys()).map(index => <option>{index + 1}</option>)}
-            </select>
-        </div>
-    }
-
-    function createMeritsAndFlawsBlock(): React.ReactElement {
-        return <div>
-            <h3 className="property-block-heading">Merits</h3>
-            {Array.from(Array(6).keys()).map(index => createMeritEntry(index))}
-            <h3 className="property-block-heading">Flaws</h3>
-            {Array.from(Array(6).keys()).map(index => createFlawEntry(index))}
-        </div>
-    }
 
     return (
         <div className="sheet">
@@ -153,44 +57,49 @@ export default function Sheet(): React.ReactElement {
             <div>
                 <h2 className="section-heading">Attributes</h2>
                 <div className="col-section">
-                    {createPropertyBlock("Physical", ["strength", "dexterity", "stamina"])}
-                    {createPropertyBlock("Social", ["charisma", "manipulation", "appearance"])}
-                    {createPropertyBlock("Mental", ["perception", "intelligence", "wits"])}
-
+                    <PropertyBlock label={"Physical"} properties={["strength", "dexterity", "stamina"]}
+                                   character={character} setCharacterProperty={setCharacterProperty}/>
+                    <PropertyBlock label={"Social"} properties={["charisma", "manipulation", "appearance"]}
+                                   character={character} setCharacterProperty={setCharacterProperty}/>
+                    <PropertyBlock label={"Mental"} properties={["perception", "intelligence", "wits"]}
+                                   character={character} setCharacterProperty={setCharacterProperty}/>
                 </div>
             </div>
             <div>
                 <h2 className="section-heading">Abilities</h2>
                 <div className="col-section">
-                    {createPropertyBlock("Talents", ["alertness", "athletics", "brawl", "dodge", "empathy", "expression", "intimidation", "leadership", "streetwise", "subterfuge"])}
-                    {createPropertyBlock("Skills", ["animalKen", "crafts", "drive", "etiquette", "firearms", "melee", "performance", "security", "stealth", "survival"])}
-                    {createPropertyBlock("Knowledges", ["academics", "computer", "finance", "investigation", "law", "linguistics", "medicine", "occult", "politics", "science"])}
+                    <PropertyBlock label={"Talents"}
+                                   properties={["alertness", "athletics", "brawl", "dodge", "empathy", "expression", "intimidation", "leadership", "streetwise", "subterfuge"]}
+                                   character={character} setCharacterProperty={setCharacterProperty}/>
+                    <PropertyBlock label={"Skills"}
+                                   properties={["animalKen", "crafts", "drive", "etiquette", "firearms", "melee", "performance", "security", "stealth", "survival"]}
+                                   character={character} setCharacterProperty={setCharacterProperty}/>
+                    <PropertyBlock label={"Knowledges"}
+                                   properties={["academics", "computer", "finance", "investigation", "law", "linguistics", "medicine", "occult", "politics", "science"]}
+                                   character={character} setCharacterProperty={setCharacterProperty}/>
                 </div>
             </div>
             <div>
                 <h2 className="section-heading">Advantages</h2>
                 <div className="col-section">
-                    {createDisciplineBlock()}
+                    <DisciplineBlock character={character} setArrayProperty={updateCharacterArrayProperty}/>
                     {createBackgroundBlock()}
-                    {createPropertyBlock("Virtues", ["conscience", "selfControl", "courage"])}
+                    <PropertyBlock label={"Virtues"} properties={["conscience", "selfControl", "courage"]}
+                                   character={character} setCharacterProperty={setCharacterProperty}/>
                 </div>
             </div>
             <div>
                 <div className={"col-section"}>
-                    {createMeritsAndFlawsBlock()}
+                    <MeritsAndFlawsBlock character={character} setArrayProperty={updateCharacterArrayProperty}/>
                 </div>
             </div>
-
-
         </div>
     );
 
-    function setCharacterProperty(property: keyof Character, value: number) {
-        if (value === 1 && character[property] === 1) {
-            value = 0;
-        }
-        setCharacter({
-            ...character, [property]: value
-        })
+    function setCharacterProperty<K extends keyof Character>(property: K, value: Character[K]): void {
+        setCharacter(prevCharacter => ({
+            ...prevCharacter,
+            [property]: value,
+        }));
     }
 }

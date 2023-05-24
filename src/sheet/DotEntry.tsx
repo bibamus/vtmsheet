@@ -26,7 +26,7 @@ function createDots({maxValue, currValue, setFunction, disabled}: DotEntryProps)
         let item = <img key={i} src={i < currValue ? require("./filled.png") : require("./empty.png")}
                         alt={i < currValue ? "filled" : "empty"}
                         onClick={disabled ? () => {
-                        } : () => setFunction(i + 1)}/>
+                        } : () => setFunction((currValue === 1 && i === 0) ? 0 : i + 1)}/>
         dots.push(item);
     }
     return dots;
