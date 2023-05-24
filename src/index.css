@@ -15,7 +15,13 @@ code {
 .col-section {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
+}
+
+.sheet {
+    /*margin-left: 10em;*/
+    /*margin-right: 10em;*/
+    /*margin-top: 3em;*/
 }
 
 .label {

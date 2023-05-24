@@ -97,18 +97,6 @@ export default function Sheet(): React.ReactElement {
         </div>
     }
 
-    function createVirtuesBlock(): React.ReactElement {
-        return <div>
-            <h3 className="property-block-heading">Virtues</h3>
-            <DotEntryWithLabel label="Conscience" maxValue={5} currValue={character.conscience}
-                               setFunction={(value) => setCharacterProperty("conscience", value)}/>
-            <DotEntryWithLabel label="Self-Control" maxValue={5} currValue={character.selfControl}
-                               setFunction={(value) => setCharacterProperty("selfControl", value)}/>
-            <DotEntryWithLabel label="Courage" maxValue={5} currValue={character.courage}
-                               setFunction={(value) => setCharacterProperty("courage", value)}/>
-        </div>
-    }
-
     function createMeritEntry(index: number): React.ReactElement {
         let merit = character.merits[index];
         return <div key={index} className="labeled-entry">
@@ -160,7 +148,7 @@ export default function Sheet(): React.ReactElement {
     }
 
     return (
-        <div className="Sheet">
+        <div className="sheet">
             <h1 className="section-heading">Vampires - The Masquerade</h1>
             <div>
                 <h2 className="section-heading">Attributes</h2>
@@ -184,7 +172,7 @@ export default function Sheet(): React.ReactElement {
                 <div className="col-section">
                     {createDisciplineBlock()}
                     {createBackgroundBlock()}
-                    {createVirtuesBlock()}
+                    {createPropertyBlock("Virtues", ["conscience", "selfControl", "courage"])}
                 </div>
             </div>
             <div>
