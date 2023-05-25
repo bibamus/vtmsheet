@@ -4,17 +4,28 @@ import MeritsAndFlawsBlock from "./MeritsAndFlawsBlock";
 import AttributesSection from "./sections/AttributeSection";
 import AbilitiesSection from "./sections/AbilitiesSection";
 import AdvantagesSection from "./sections/AdvantagesSection";
+import {characterDB} from "../indexeddb/CharacterDB";
 
 export default function Sheet(): React.ReactElement {
 
     const [character, setCharacter] = useState<Character>(new Character());
+    const [initialized, setInitialized] = useState<boolean>(false);
 
+    useEffect(() => {
+        characterDB.characters.toArray().then((characters) => {
+            if (characters.length > 0) {
+                setCharacter(characters[0]);
+            }
+            setInitialized(true);
+        });
+    }, []);
 
     useEffect(() => {
         console.log(JSON.stringify(character));
-
-
-    }, [character]);
+        if (initialized) {
+            (async () => await characterDB.characters.put(character))()
+        }
+    }, [initialized, character]);
 
 
     function setCharacterArrayProperty<T extends Discipline | Background | Merit | Flaw>(
@@ -37,6 +48,8 @@ export default function Sheet(): React.ReactElement {
             </div>
         </div>;
     }
+
+    if (!initialized) return (<div>Loading...</div>);
 
     return (
         <div className="sheet">
