@@ -12,6 +12,11 @@ code {
     monospace;
 }
 
+.container {
+    display: flex;
+    justify-content: flex-start;
+}
+
 .col-section {
     display: flex;
     flex-direction: row;
@@ -53,11 +58,10 @@ code {
     justify-content: space-between;
 }
 
-/*.dot-container {*/
-/*    display: flex;*/
-/*    flex-wrap: wrap;*/
-/*}*/
+.character-selection-row {
+    border: solid 1px black;
+}
 
-/*.dot:nth-child(10n) {*/
-/*    flex-basis: 100%;*/
-/*}*/
+.selected-character {
+    background: gray;
+}

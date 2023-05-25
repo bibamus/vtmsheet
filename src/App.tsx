@@ -5,15 +5,18 @@ import Sheet from "./sheet/Sheet";
 import characterReducer from "./state/CharacterReducer";
 import Character from "./model/Character";
 import {characterDB} from "./indexeddb/CharacterDB";
+import CharacterSelect from "./character-select/CharacterSelect";
 
 export default function App(): React.ReactElement {
     const [character, dispatch] = useReducer(characterReducer, new Character());
+    const [characters, setCharacters] = useState<Character[]>([]);
     const [initialized, setInitialized] = useState<boolean>(false);
 
     useEffect(() => {
         console.log("Loading character");
         characterDB.characters.toArray().then((characters) => {
             if (characters.length > 0) {
+                setCharacters(characters);
                 dispatch({type: "setCharacter", character: characters[0]});
             }
             setInitialized(true);
@@ -26,9 +29,30 @@ export default function App(): React.ReactElement {
         }
     }, [initialized, character]);
 
+    useEffect(() => {
+        characterDB.characters.toArray().then((characters) => setCharacters(characters));
+    }, [character]);
+
+    function onNewCharacter() {
+        const character = new Character();
+        setCharacters([...characters, character]);
+        dispatch({type: "setCharacter", character: character});
+    }
+
+    function onCharacterChange(id: string) {
+        const character = characters.find(character => character.id === id);
+        if (character) {
+            dispatch({type: "setCharacter", character: character});
+        }
+    }
+
 
     return (
-        <Sheet character={character} characterDispatch={dispatch} initialized={initialized}/>
+        <div className={"container"}>
+            <CharacterSelect characters={characters} currentCharacter={character} onCharacterChange={onCharacterChange}
+                             initialized={initialized} onNewCharacter={onNewCharacter}/>
+            <Sheet character={character} characterDispatch={dispatch} initialized={initialized}/>
+        </div>
     );
 }
 

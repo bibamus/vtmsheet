@@ -119,7 +119,7 @@ export default class Character {
 
     readonly id: string = uuidv4()
 
-    readonly characterName: string = "";
+    readonly characterName: string = "Unnamed";
     readonly playerName: string = "";
     readonly chronicle: string = "";
     readonly nature: string = "";
