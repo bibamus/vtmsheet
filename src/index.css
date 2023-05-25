@@ -46,3 +46,18 @@ code {
 .section-heading {
     text-align: center;
 }
+
+.path-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/*.dot-container {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*}*/
+
+/*.dot:nth-child(10n) {*/
+/*    flex-basis: 100%;*/
+/*}*/

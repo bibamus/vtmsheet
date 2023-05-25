@@ -1,5 +1,5 @@
 import React from "react";
-import Character, {Flaw, FlawName, Merit, MeritName} from "../model/Character";
+import Character, {Flaw, FlawName, Merit, MeritName} from "../../model/Character";
 
 interface MeritsAndFlawsBlockProps {
     character: Character;

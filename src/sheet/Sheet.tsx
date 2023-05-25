@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Character, {Background, Discipline, Flaw, Merit} from "../model/Character";
-import MeritsAndFlawsBlock from "./MeritsAndFlawsBlock";
 import AttributesSection from "./sections/AttributeSection";
 import AbilitiesSection from "./sections/AbilitiesSection";
 import AdvantagesSection from "./sections/AdvantagesSection";
 import {characterDB} from "../indexeddb/CharacterDB";
+import MiscSection from "./sections/MiscSection";
 
 export default function Sheet(): React.ReactElement {
 
@@ -33,21 +33,20 @@ export default function Sheet(): React.ReactElement {
         index: number,
         value: Partial<T>
     ) {
-        setCharacter((prevCharacter) => {
+        setCharacter(prevCharacter => {
             const newArray = [...prevCharacter[propertyName]];
             newArray[index] = {...newArray[index], ...value};
             return {...prevCharacter, [propertyName]: newArray};
         });
     }
 
-
-    function MiscSection() {
-        return <div>
-            <div className={"col-section"}>
-                <MeritsAndFlawsBlock character={character} setArrayProperty={setCharacterArrayProperty}/>
-            </div>
-        </div>;
+    function setCharacterProperty<K extends keyof Character>(property: K, value: Character[K]): void {
+        setCharacter(prevCharacter => ({
+            ...prevCharacter,
+            [property]: value,
+        }));
     }
+
 
     if (!initialized) return (<div>Loading...</div>);
 
@@ -60,14 +59,10 @@ export default function Sheet(): React.ReactElement {
                               setCharacterArrayProperty={setCharacterArrayProperty}/>
             <AdvantagesSection character={character} setCharacterProperty={setCharacterProperty}
                                setCharacterArrayProperty={setCharacterArrayProperty}/>
-            <MiscSection/>
+            <MiscSection character={character} setCharacterProperty={setCharacterProperty}
+                         setCharacterArrayProperty={setCharacterArrayProperty}/>
         </div>
     );
 
-    function setCharacterProperty<K extends keyof Character>(property: K, value: Character[K]): void {
-        setCharacter(prevCharacter => ({
-            ...prevCharacter,
-            [property]: value,
-        }));
-    }
+
 }

@@ -1,6 +1,6 @@
 import React from "react";
-import Character, {Discipline, DisciplineName} from "../model/Character";
-import DotEntry from "./DotEntry";
+import Character, {Discipline, DisciplineName} from "../../model/Character";
+import DotEntry from "../DotEntry";
 
 interface DisciplineBlockProps {
     character: Character;

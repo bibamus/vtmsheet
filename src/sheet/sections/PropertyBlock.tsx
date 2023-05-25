@@ -1,7 +1,7 @@
 import React from "react";
-import DotEntryWithLabel from "./DotEntryWithLabel";
-import Character from "../model/Character";
-import {capitalizeFirstLetter} from "../Helper";
+import DotEntryWithLabel from "../DotEntryWithLabel";
+import Character from "../../model/Character";
+import {capitalizeFirstLetter} from "../../Helper";
 
 interface PropertyBlockProps {
     label: string;
@@ -10,7 +10,12 @@ interface PropertyBlockProps {
     setCharacterProperty: (propertyName: keyof Character, value: number) => void;
 }
 
-export default function PropertyBlock({label,properties,character,setCharacterProperty} : PropertyBlockProps): React.ReactElement {
+export default function PropertyBlock({
+                                          label,
+                                          properties,
+                                          character,
+                                          setCharacterProperty
+                                      }: PropertyBlockProps): React.ReactElement {
     return <div>
         <h3 className="property-block-heading">{label}</h3>,
         {

@@ -1,6 +1,6 @@
 import React from "react";
-import DisciplineBlock from "../DisciplineBlock";
-import PropertyBlock from "../PropertyBlock";
+import DisciplineBlock from "./DisciplineBlock";
+import PropertyBlock from "./PropertyBlock";
 import SectionProps from "./SectionProps";
 import {Background, BackgroundName} from "../../model/Character";
 import DotEntry from "../DotEntry";

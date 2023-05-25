@@ -1,4 +1,4 @@
-import PropertyBlock from "../PropertyBlock";
+import PropertyBlock from "./PropertyBlock";
 import React from "react";
 import SectionProps from "./SectionProps";
 
