@@ -4,25 +4,28 @@ import DotEntry from "./DotEntry";
 
 interface DisciplineBlockProps {
     character: Character;
-    setArrayProperty: (propertyName: "disciplines",
-                       index: number,
-                       value: Partial<Discipline>) => void;
+    setCharacterArrayProperty: (propertyName: "disciplines",
+                                index: number,
+                                value: Partial<Discipline>) => void;
 }
 
-export default function DisciplineBlock({character, setArrayProperty}: DisciplineBlockProps): React.ReactElement {
+export default function DisciplineBlock({
+                                            character,
+                                            setCharacterArrayProperty
+                                        }: DisciplineBlockProps): React.ReactElement {
 
     function createDisciplineEntry(index: number): React.ReactElement {
         let discipline = character.disciplines[index];
         return <div key={index} className="labeled-entry">
             <select className="label" defaultValue="" value={discipline?.name}
-                    onChange={(choice) => setArrayProperty("disciplines", index, {name: choice.currentTarget.value as DisciplineName})}>
+                    onChange={(choice) => setCharacterArrayProperty("disciplines", index, {name: choice.currentTarget.value as DisciplineName})}>
                 <option></option>
                 {
                     Object.values(DisciplineName).map(value => <option key={value}>{value}</option>)
                 }
             </select>
             <DotEntry disabled={discipline?.name == null} maxValue={5} currValue={discipline?.level ?? 0}
-                      setFunction={value => setArrayProperty("disciplines", index, {level: value})}/>
+                      setFunction={value => setCharacterArrayProperty("disciplines", index, {level: value})}/>
         </div>
 
     }
