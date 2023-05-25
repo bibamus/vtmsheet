@@ -26,12 +26,10 @@ export default function App(): React.ReactElement {
     useEffect(() => {
         if (initialized) {
             (async () => await characterDB.characters.put(character))()
+            characterDB.characters.toArray().then((characters) => setCharacters(characters));
         }
     }, [initialized, character]);
 
-    useEffect(() => {
-        characterDB.characters.toArray().then((characters) => setCharacters(characters));
-    }, [character]);
 
     function onNewCharacter() {
         const character = new Character();
