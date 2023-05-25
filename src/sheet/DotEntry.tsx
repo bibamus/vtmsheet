@@ -32,7 +32,7 @@ function createDots({maxValue, currValue, setFunction, square, disabled}: DotEnt
                         } : () => setFunction((currValue === 1 && i === 0) ? 0 : i + 1)}/>
         dots.push(item);
         if (i % 10 === 9) {
-            dots.push(<br key={i + 1}/>);
+            dots.push(<br key={`br-${i}`}/>);
         }
     }
     return dots;

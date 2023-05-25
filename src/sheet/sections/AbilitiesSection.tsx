@@ -1,20 +1,20 @@
 import PropertyBlock from "./PropertyBlock";
 import React from "react";
-import SectionProps from "./SectionProps";
+import CharacterProps from "../CharacterProps";
 
-export default function AbilitiesSection({character, setCharacterProperty}: SectionProps) {
+export default function AbilitiesSection({character, characterDispatch}: CharacterProps) {
     return <div>
         <h2 className="section-heading">Abilities</h2>
         <div className="col-section">
             <PropertyBlock label={"Talents"}
                            properties={["alertness", "athletics", "brawl", "dodge", "empathy", "expression", "intimidation", "leadership", "streetwise", "subterfuge"]}
-                           character={character} setCharacterProperty={setCharacterProperty}/>
+                           character={character} characterDispatch={characterDispatch}/>
             <PropertyBlock label={"Skills"}
                            properties={["animalKen", "crafts", "drive", "etiquette", "firearms", "melee", "performance", "security", "stealth", "survival"]}
-                           character={character} setCharacterProperty={setCharacterProperty}/>
+                           character={character} characterDispatch={characterDispatch}/>
             <PropertyBlock label={"Knowledges"}
                            properties={["academics", "computer", "finance", "investigation", "law", "linguistics", "medicine", "occult", "politics", "science"]}
-                           character={character} setCharacterProperty={setCharacterProperty}/>
+                           character={character} characterDispatch={characterDispatch}/>
         </div>
     </div>;
 }

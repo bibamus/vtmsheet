@@ -1,16 +1,13 @@
-import Character, {DamageLevel} from "../../model/Character";
+import {DamageLevel} from "../../model/Character";
 import React from "react";
-
-interface StatusBlockProps {
-    character: Character;
-    setCharacterProperty: <T>(propertyName: keyof Character, value: T) => void;
-}
+import CharacterProps from "../CharacterProps";
 
 
-export default function StatusBlock({character, setCharacterProperty}: StatusBlockProps): React.ReactElement {
+export default function StatusBlock({character, characterDispatch}: CharacterProps): React.ReactElement {
 
     function DamageSelect({level}: { level: DamageLevel }): React.ReactElement {
-        return <select className={"label"} value={level}>
+        return <select className={"label"} value={level} onChange={event => {
+        }}>
             <option value={DamageLevel.None}></option>
             <option value={DamageLevel.Bashing}>/</option>
             <option value={DamageLevel.Lethal}>x</option>
@@ -53,12 +50,20 @@ export default function StatusBlock({character, setCharacterProperty}: StatusBlo
         </div>
         <div>
             <h3 className="property-block-heading">Weakness</h3>
-            <input value={character.weakness} onChange={event => setCharacterProperty("weakness", event.target.value)}/>
+            <input value={character.weakness} onChange={event => characterDispatch({
+                type: "setProperty",
+                property: "weakness",
+                value: event.target.value
+            })}/>
         </div>
         <div>
             <h3 className="property-block-heading">Experience</h3>
             <input value={character.experience} type={"number"}
-                   onChange={event => setCharacterProperty("experience", event.target.value)}/>
+                   onChange={event => characterDispatch({
+                       type: "setProperty",
+                       property: "experience",
+                       value: event.target.value
+                   })}/>
         </div>
     </div>
 }

@@ -1,14 +1,9 @@
 import React from "react";
-import Character, {Flaw, FlawName, Merit, MeritName} from "../../model/Character";
+import {FlawName, MeritName} from "../../model/Character";
+import CharacterProps from "../CharacterProps";
 
-interface MeritsAndFlawsBlockProps {
-    character: Character;
-    setArrayProperty: <T extends Merit|Flaw>(propertyName: "merits" | "flaws",
-                               index: number,
-                               value: Partial<T>) => void;
-}
 
-export default function MeritsAndFlawsBlock({character, setArrayProperty}: MeritsAndFlawsBlockProps): React.ReactElement {
+export default function MeritsAndFlawsBlock({character, characterDispatch}: CharacterProps): React.ReactElement {
 
     const costArray = Array.from(Array(7).keys()).map(index => (index + 1).toString());
 
@@ -16,7 +11,7 @@ export default function MeritsAndFlawsBlock({character, setArrayProperty}: Merit
         return createOptionsWithEmptyOption(costArray);
     }
 
-    function createOptionsWithEmptyOption(values: string[]){
+    function createOptionsWithEmptyOption(values: string[]) {
         return <>
             <option key={""}></option>
             {values.map(value => <option key={value}>{value}</option>)}
@@ -27,14 +22,24 @@ export default function MeritsAndFlawsBlock({character, setArrayProperty}: Merit
         let flaw = character.flaws[index];
         return <div key={index} className="labeled-entry">
             <select className="label" defaultValue={flaw?.name}
-                    onChange={(choice) => setArrayProperty<Flaw>("flaws", index, {name: choice.currentTarget.value as FlawName})}
+                    onChange={(choice) => characterDispatch({
+                        type: "setArrayProperty",
+                        property: "flaws",
+                        index,
+                        value: {name: choice.currentTarget.value as FlawName}
+                    })}
             >
                 {
                     createOptionsWithEmptyOption(Object.values(FlawName))
                 }
             </select>
             <select className="label"
-                    onChange={(choice) => setArrayProperty<Flaw>("flaws", index, {cost: parseInt(choice.currentTarget.value)})}
+                    onChange={(choice) => characterDispatch({
+                        type: "setArrayProperty",
+                        property: "flaws",
+                        index,
+                        value: {cost: parseInt(choice.currentTarget.value)}
+                    })}
                     defaultValue={flaw?.cost ?? 0}
             >
 
@@ -47,14 +52,24 @@ export default function MeritsAndFlawsBlock({character, setArrayProperty}: Merit
         let merit = character.merits[index];
         return <div key={index} className="labeled-entry">
             <select className="label" defaultValue={merit?.name}
-                    onChange={(choice) => setArrayProperty<Merit>("merits", index, {name: choice.currentTarget.value as MeritName})}
+                    onChange={(choice) => characterDispatch({
+                        type: "setArrayProperty",
+                        property: "merits",
+                        index,
+                        value: {name: choice.currentTarget.value as MeritName}
+                    })}
             >
                 {
                     createOptionsWithEmptyOption(Object.values(MeritName))
                 }
             </select>
             <select className="label" defaultValue={merit?.cost ?? 0}
-                    onChange={(choice) => setArrayProperty<Merit>("merits", index, {cost: parseInt(choice.currentTarget.value)})}
+                    onChange={(choice) => characterDispatch({
+                        type: "setArrayProperty",
+                        property: "merits",
+                        index,
+                        value: {cost: parseInt(choice.currentTarget.value)}
+                    })}
             >
                 {createCostOptions()}
             </select>

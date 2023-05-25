@@ -1,28 +1,37 @@
 import React from "react";
 import DisciplineBlock from "./DisciplineBlock";
 import PropertyBlock from "./PropertyBlock";
-import SectionProps from "./SectionProps";
-import {Background, BackgroundName} from "../../model/Character";
+import CharacterProps from "../CharacterProps";
+import {BackgroundName} from "../../model/Character";
 import DotEntry from "../DotEntry";
 
 export default function AdvantagesSection({
                                               character,
-                                              setCharacterProperty,
-                                              setCharacterArrayProperty
-                                          }: SectionProps): React.ReactElement {
+                                              characterDispatch
+                                          }: CharacterProps): React.ReactElement {
 
     function createBackgroundEntry(index: number): React.ReactElement {
         let background = character.backgrounds[index];
         return <div key={index} className="labeled-entry">
-            <select className="label" defaultValue="" value={background?.name}
-                    onChange={(choice) => setCharacterArrayProperty<Background>("backgrounds", index, {name: choice.currentTarget.value as BackgroundName})}>
+            <select className="label" value={background?.name}
+                    onChange={(choice) => characterDispatch({
+                        type: "setArrayProperty",
+                        property: "backgrounds",
+                        index: index,
+                        value: {name: choice.currentTarget.value as BackgroundName}
+                    })}>
                 <option></option>
                 {
                     Object.values(BackgroundName).map(value => <option key={value}>{value}</option>)
                 }
             </select>
             <DotEntry disabled={background?.name == null} maxValue={5} currValue={background?.level ?? 0}
-                      setFunction={value => setCharacterArrayProperty<Background>("backgrounds", index, {level: value})}/>
+                      setFunction={value => characterDispatch({
+                          type: "setArrayProperty",
+                          property: "backgrounds",
+                          index: index,
+                          value: {level: value}
+                      })}/>
         </div>
     }
 
@@ -37,10 +46,11 @@ export default function AdvantagesSection({
     return <div>
         <h2 className="section-heading">Advantages</h2>
         <div className="col-section">
-            <DisciplineBlock character={character} setCharacterArrayProperty={setCharacterArrayProperty}/>
+            <DisciplineBlock character={character}
+                             characterDispatch={characterDispatch}/>
             <BackgroundBlock/>
             <PropertyBlock label={"Virtues"} properties={["conscience", "selfControl", "courage"]}
-                           character={character} setCharacterProperty={setCharacterProperty}/>
+                           character={character} characterDispatch={characterDispatch}/>
         </div>
     </div>;
 }
