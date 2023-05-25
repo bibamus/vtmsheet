@@ -95,8 +95,23 @@ export enum DamageLevel {
     Bashing = "Bashing",
     Lethal = "Lethal",
     Aggravated = "Aggravated"
+}
 
-
+export enum ClanName {
+    Assamite = "Assamite",
+    Brujah = "Brujah",
+    Caitiff = "Caitiff",
+    FollowersOfSet = "Followers of Set",
+    Gangrel = "Gangrel",
+    Giovanni = "Giovanni",
+    Lasombra = "Lasombra",
+    Malkavian = "Malkavian",
+    Nosferatu = "Nosferatu",
+    Ravnos = "Ravnos",
+    Toreador = "Toreador",
+    Tremere = "Tremere",
+    Tzimisce = "Tzimisce",
+    Ventrue = "Ventrue"
 }
 
 
@@ -106,8 +121,13 @@ export default class Character {
 
     readonly characterName: string = "";
     readonly playerName: string = "";
-
+    readonly chronicle: string = "";
+    readonly nature: string = "";
+    readonly demeanor: string = "";
+    readonly concept: string = "";
+    readonly clan: ClanName | null = null;
     readonly generation: number = 13;
+    readonly sire: string = "";
 
     readonly strength: number = 0;
     readonly dexterity: number = 0;
@@ -180,5 +200,6 @@ export default class Character {
 
     readonly weakness: string = ""
     readonly experience: number = 0;
+
 
 }

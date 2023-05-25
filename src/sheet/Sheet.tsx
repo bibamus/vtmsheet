@@ -5,6 +5,7 @@ import AbilitiesSection from "./sections/AbilitiesSection";
 import AdvantagesSection from "./sections/AdvantagesSection";
 import {characterDB} from "../indexeddb/CharacterDB";
 import MiscSection from "./sections/MiscSection";
+import HeaderSection from "./sections/HeaderSection";
 
 export default function Sheet(): React.ReactElement {
 
@@ -53,6 +54,8 @@ export default function Sheet(): React.ReactElement {
     return (
         <div className="sheet">
             <h1 className="section-heading">Vampires - The Masquerade</h1>
+            <HeaderSection character={character} setCharacterProperty={setCharacterProperty}
+                           setCharacterArrayProperty={setCharacterArrayProperty}/>
             <AttributesSection character={character} setCharacterProperty={setCharacterProperty}
                                setCharacterArrayProperty={setCharacterArrayProperty}/>
             <AbilitiesSection character={character} setCharacterProperty={setCharacterProperty}
