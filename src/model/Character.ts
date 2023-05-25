@@ -90,6 +90,15 @@ export enum PathName {
 
 }
 
+export enum DamageLevel {
+    None = "None",
+    Bashing = "Bashing",
+    Lethal = "Lethal",
+    Aggravated = "Aggravated"
+
+
+}
+
 
 export default class Character {
 
@@ -161,5 +170,15 @@ export default class Character {
     readonly maxWillpower: number = 0;
     readonly currentWillpower: number = 0;
     readonly bloodPool: number = 0;
+    readonly bruised: DamageLevel = DamageLevel.None;
+    readonly hurt: DamageLevel = DamageLevel.None;
+    readonly injured: DamageLevel = DamageLevel.None;
+    readonly wounded: DamageLevel = DamageLevel.None;
+    readonly mauled: DamageLevel = DamageLevel.None;
+    readonly crippled: DamageLevel = DamageLevel.None;
+    readonly incapacitated: DamageLevel = DamageLevel.None;
+
+    readonly weakness: string = ""
+    readonly experience: number = 0;
 
 }
