@@ -17,15 +17,11 @@ code {
     justify-content: flex-start;
 }
 
-.col-section {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-}
+
 
 .sheet {
-    /*margin-left: 10em;*/
-    /*margin-right: 10em;*/
+    margin-left: 10em;
+    margin-right: 10em;
     /*margin-top: 3em;*/
 }
 
@@ -64,4 +60,15 @@ code {
 
 .selected-character {
     background: gray;
+}
+
+.dot-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.full-width {
+    /*width: 100%;*/
 }

@@ -3,6 +3,7 @@ import DotEntryWithLabel from "../DotEntryWithLabel";
 import Character from "../../model/Character";
 import {capitalizeFirstLetter} from "../../Helper";
 import {CharacterAction} from "../../state/CharacterReducer";
+import Grid from "@mui/material/Unstable_Grid2";
 
 interface PropertyBlockProps {
     label: string;
@@ -18,8 +19,10 @@ export default function PropertyBlock({
                                           character,
                                           characterDispatch
                                       }: PropertyBlockProps): React.ReactElement {
-    return <div>
-        <h3 className="property-block-heading">{label}</h3>,
+    return <Grid container>
+        <Grid xs={12}>
+            <h3 className="property-block-heading">{label}</h3>,
+        </Grid>
         {
             properties.map(property => <DotEntryWithLabel key={property} label={capitalizeFirstLetter(property)}
                                                           maxValue={5}
@@ -31,5 +34,5 @@ export default function PropertyBlock({
                                                           })}
             />)
         }
-    </div>;
+    </Grid>;
 }

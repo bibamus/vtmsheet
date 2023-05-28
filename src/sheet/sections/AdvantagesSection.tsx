@@ -4,6 +4,7 @@ import PropertyBlock from "./PropertyBlock";
 import CharacterProps from "../CharacterProps";
 import {BackgroundName} from "../../model/Character";
 import DotEntry from "../DotEntry";
+import Grid from "@mui/material/Unstable_Grid2";
 
 export default function AdvantagesSection({
                                               character,
@@ -43,15 +44,21 @@ export default function AdvantagesSection({
     }
 
 
-    return <div>
-        <h2 className="section-heading">Advantages</h2>
-        <div className="col-section">
+    return <>
+        <Grid xs={12}>
+            <h2 className="section-heading">Advantages</h2>
+        </Grid>
+        <Grid xs={4}>
             <DisciplineBlock character={character}
                              characterDispatch={characterDispatch}/>
+        </Grid>
+        <Grid xs={4}>
             <BackgroundBlock/>
+        </Grid>
+        <Grid xs={4}>
             <PropertyBlock label={"Virtues"} properties={["conscience", "selfControl", "courage"]}
                            character={character} characterDispatch={characterDispatch}/>
-        </div>
-    </div>;
+        </Grid>
+    </>;
 }
 
