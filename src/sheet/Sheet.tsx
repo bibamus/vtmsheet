@@ -18,7 +18,7 @@ export default function Sheet({character, characterDispatch, initialized}: Sheet
 
     return (<Box className="sheet">
         <h1 className="section-heading">Vampires - The Masquerade</h1>
-        <Grid container disableEqualOverflow columnSpacing={20}>
+        <Grid container columnSpacing={20}>
             <HeaderSection character={character} characterDispatch={characterDispatch}/>
             <AttributesSection character={character} characterDispatch={characterDispatch}/>
             <AbilitiesSection character={character} characterDispatch={characterDispatch}/>

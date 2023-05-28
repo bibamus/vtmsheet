@@ -22,6 +22,8 @@ code {
 .sheet {
     margin-left: 10em;
     margin-right: 10em;
+    padding: 1em;
+    border: solid thin black;
     /*margin-top: 3em;*/
 }
 
