@@ -64,11 +64,8 @@ code {
     background: gray;
 }
 
-.dot-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
+.dot {
+    width: 100%;
 }
 
 .full-width {
