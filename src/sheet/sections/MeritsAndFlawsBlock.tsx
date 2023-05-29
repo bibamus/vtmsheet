@@ -61,7 +61,7 @@ export default function MeritsAndFlawsBlock({character, characterDispatch}: Char
     function AddMeritRow(): React.ReactElement {
         return <Grid container>
             <Grid xs={6}>
-                <select className="label" value={selectedMeritName ?? ""}
+                <select className="label constrained" value={selectedMeritName ?? ""}
                         onChange={event => setSelectedMeritName(event.target.value as MeritName)}>
                     {getValidMerits().map(value => <option key={value}>{value}</option>)}
                 </select>
@@ -81,7 +81,7 @@ export default function MeritsAndFlawsBlock({character, characterDispatch}: Char
     function AddFlawRow(): React.ReactElement {
         return <Grid container>
             <Grid xs={6}>
-                <select className="label" value={selectedFlawName ?? ""}
+                <select className="label constrained" value={selectedFlawName ?? ""}
                         onChange={event => setSelectedFlawName(event.target.value as FlawName)}>
                     {getValidFlaws().map(value => <option key={value}>{value}</option>)}
                 </select>

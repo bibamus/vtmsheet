@@ -59,10 +59,19 @@ export default function DisciplineBlock({
     }
 
     function createDisciplineEntry(discipline: Discipline): React.ReactElement {
-        return <Grid container key={discipline.name}>
+        return <Grid container key={discipline.name} columns={13}>
             <DotEntryWithLabel label={discipline.name} maxValue={5}
                                currValue={discipline.level}
                                setFunction={value => updateDiscipline(discipline, value)}/>
+            <Grid xs={1}>
+                <button onClick={() => characterDispatch({
+                    type: "removeArrayProperty",
+                    property: "disciplines",
+                    value: discipline
+                })}>
+                    Remove
+                </button>
+            </Grid>
         </Grid>
     }
 

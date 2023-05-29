@@ -58,10 +58,19 @@ export default function BackgroundBlock({
     }
 
     function createBackgroundEntry(background: Background): React.ReactElement {
-        return <Grid container key={background.name}>
+        return <Grid container key={background.name} columns={13}>
             <DotEntryWithLabel label={background.name} maxValue={5}
                                currValue={background.level}
                                setFunction={value => updateBackground(background, value)}/>
+            <Grid xs={1}>
+                <button onClick={() => characterDispatch({
+                    type: "removeArrayProperty",
+                    property: "backgrounds",
+                    value: background
+                })}>
+                    Remove
+                </button>
+            </Grid>
         </Grid>
     }
 
