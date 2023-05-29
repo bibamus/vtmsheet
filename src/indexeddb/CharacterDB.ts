@@ -9,7 +9,14 @@ class CharacterDB extends Dexie {
         this.version(1).stores({
             characters: Object.keys(new Character()).join(", ")
         })
+
+        this.version(2).stores({
+            characters: Object.keys(new Character()).join(", ")
+        }).upgrade(trans => {
+            trans.table("characters").clear();
+        })
     }
 }
 
 export const characterDB = new CharacterDB();
+
