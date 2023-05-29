@@ -76,7 +76,7 @@ export default function App(): React.ReactElement {
 
     return (<>
             <CssBaseline/>
-            <AppBar>
+            <AppBar position={"sticky"}>
                 <Toolbar>
                     <IconButton
                         size="small"
