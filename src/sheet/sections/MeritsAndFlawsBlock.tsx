@@ -82,7 +82,8 @@ export default function MeritsAndFlawsBlock({character, characterDispatch}: Char
         return <Grid container>
             <Grid xs={6}>
                 <select className="label constrained" value={selectedFlawName ?? ""}
-                        onChange={event => setSelectedFlawName(event.target.value as FlawName)}>
+                        onChange={event => setSelectedFlawName(event.target.value as FlawName)}
+                >
                     {getValidFlaws().map(value => <option key={value}>{value}</option>)}
                 </select>
             </Grid>
