@@ -28,10 +28,10 @@ function createDots({maxValue, currValue, setFunction, square, disabled}: DotEnt
     let filledImage = square ? require("./filled-square.png") : require("./filled-dot.png");
     let emptyImage = square ? require("./empty-square.png") : require("./empty-dot.png");
     for (let i = 0; i < maxValue; i++) {
-        let item = <Grid xs={1}><img className={"dot"} key={i} src={i < currValue ? filledImage : emptyImage}
-                                     alt={i < currValue ? "filled" : "empty"}
-                                     onClick={disabled ? () => {
-                                     } : () => setFunction((currValue === 1 && i === 0) ? 0 : i + 1)}/>
+        let item = <Grid xs={1} key={i}><img className={"dot"} src={i < currValue ? filledImage : emptyImage}
+                                             alt={i < currValue ? "filled" : "empty"}
+                                             onClick={disabled ? () => {
+                                             } : () => setFunction((currValue === 1 && i === 0) ? 0 : i + 1)}/>
         </Grid>
         dots.push(item);
     }
