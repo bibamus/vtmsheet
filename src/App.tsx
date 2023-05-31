@@ -5,10 +5,8 @@ import Sheet from "./sheet/Sheet";
 import characterReducer from "./state/CharacterReducer";
 import Character from "./model/Character";
 import {characterDB} from "./indexeddb/CharacterDB";
-import {AppBar, CssBaseline, IconButton, MenuItem, Select, Toolbar} from "@mui/material";
-import MenuIcon from '@mui/icons-material/Menu';
-import DeleteIcon from '@mui/icons-material/Delete';
-import AddIcon from '@mui/icons-material/Add';
+import {CssBaseline} from "@mui/material";
+import TopBar from "./topbar/TopBar";
 
 
 export default function App(): React.ReactElement {
@@ -50,16 +48,6 @@ export default function App(): React.ReactElement {
         }
     }
 
-    function CharacterSelect(): React.ReactElement {
-        if (!initialized || character === null) return <></>;
-        return <Select sx={{color: "white", mr: 1}}
-                       value={character.id} onChange={event => onCharacterChange(event.target.value)}>
-            {characters.map(character => <MenuItem
-                key={character.id}
-                value={character.id}>{character.clan ?? "No Clan"} - {character.characterName}</MenuItem>)}
-        </Select>
-    }
-
 
     function deleteCharacter() {
         if (character.id) {
@@ -74,43 +62,11 @@ export default function App(): React.ReactElement {
         }
     }
 
+
     return (<>
             <CssBaseline/>
-            <AppBar position={"sticky"}>
-                <Toolbar>
-                    <IconButton
-                        size="small"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 4}}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <CharacterSelect/>
-                    <IconButton
-                        size="small"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 1}}
-                        onClick={deleteCharacter}
-                    >
-                        <DeleteIcon/>
-                    </IconButton>
-                    <IconButton
-                        size="small"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        sx={{mr: 1}}
-                        onClick={addCharacter}
-                    >
-                        <AddIcon/>
-                    </IconButton>
-
-                </Toolbar>
-            </AppBar>
+            <TopBar onDeleteClick={deleteCharacter} onAddClick={addCharacter} character={character}
+                    characters={characters} initialized={initialized} onCharacterChange={onCharacterChange}/>
             <Sheet character={character} characterDispatch={dispatch} initialized={initialized}/>
         </>
     );

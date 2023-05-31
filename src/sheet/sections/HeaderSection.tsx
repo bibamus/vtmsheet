@@ -6,7 +6,7 @@ import Grid from "@mui/material/Unstable_Grid2";
 export default function HeaderSection({character, characterDispatch}: CharacterProps) {
 
     function ClanSelect() {
-        return <select className={"full-width"} defaultValue={character.clan ?? ""}
+        return <select defaultValue={character.clan ?? ""}
                        onChange={event => characterDispatch({
                            type: "setProperty",
                            property: "clan",
@@ -105,7 +105,7 @@ export default function HeaderSection({character, characterDispatch}: CharacterP
                     <label className={"label"}>Generation</label>
                 </Grid>
                 <Grid xs={6}>
-                    <input className={"full-width"} value={character.generation}
+                    <input value={character.generation}
                            onChange={event => characterDispatch({
                                type: "setProperty",
                                property: "generation",
@@ -116,7 +116,7 @@ export default function HeaderSection({character, characterDispatch}: CharacterP
                     <label className={"label"}>Sire</label>
                 </Grid>
                 <Grid xs={6}>
-                    <input className={"full-width"} value={character.sire} onChange={event => characterDispatch({
+                    <input value={character.sire} onChange={event => characterDispatch({
                         type: "setProperty",
                         property: "sire",
                         value: event.target.value
