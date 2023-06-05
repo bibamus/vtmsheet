@@ -7,13 +7,17 @@ import Character from "./model/Character";
 import {characterDB} from "./indexeddb/CharacterDB";
 import {CssBaseline} from "@mui/material";
 import TopBar from "./topbar/TopBar";
+import {SearchItem} from "./topbar/SearchItems";
 
+export const MarkValueContext = React.createContext<SearchItem | null>(null);
 
 export default function App(): React.ReactElement {
 
     const [character, dispatch] = useReducer(characterReducer, new Character());
     const [characters, setCharacters] = useState<Character[]>([]);
     const [initialized, setInitialized] = useState<boolean>(false);
+    const [markValue, setMarkValue] = React.useState<SearchItem | null>(null);
+
 
     useEffect(() => {
         console.log("Loading character");
@@ -65,9 +69,12 @@ export default function App(): React.ReactElement {
 
     return (<>
             <CssBaseline/>
-            <TopBar onDeleteClick={deleteCharacter} onAddClick={addCharacter} character={character}
-                    characters={characters} initialized={initialized} onCharacterChange={onCharacterChange}/>
-            <Sheet character={character} characterDispatch={dispatch} initialized={initialized}/>
+            <MarkValueContext.Provider value={markValue}>
+                <TopBar onDeleteClick={deleteCharacter} onAddClick={addCharacter} character={character}
+                        characters={characters} initialized={initialized} onCharacterChange={onCharacterChange}
+                        markValue={markValue} setMarkValue={setMarkValue}/>
+                <Sheet character={character} characterDispatch={dispatch} initialized={initialized}/>
+            </MarkValueContext.Provider>
         </>
     );
 }
