@@ -1,3 +1,5 @@
+import {capitalizeFirstLetter} from "../Helper";
+
 export interface SearchItem {
     type: string;
     value: string;
@@ -5,10 +7,14 @@ export interface SearchItem {
 }
 
 
-export const searchItems: SearchItem[] = [
-    {type: "stat", name: "Strength", value: "strength"},
-    {type: "stat", name: "Dexterity", value: "dexterity"},
-    {type: "stat", name: "Stamina", value: "stamina"},
-    {type: "stat", name: "Intelligence", value: "intelligence"},
+function statEntry(value: string) {
+    return {
+        type: "stat",
+        value: value,
+        name: capitalizeFirstLetter(value)
+    }
+}
 
+export const searchItems: SearchItem[] = [
+    ...["strength", "dexterity", "stamina", "charisma", "manipulation", "appearance", "perception", "intelligence", "wits"].map(statEntry),
 ]

@@ -32,7 +32,7 @@ export default function PropertyBlock({
                                                               property: property,
                                                               value: value
                                                           })}
-            />)
+                                                          markSelector={{type: "stat", value: property}}/>)
         }
     </Grid>;
 }
