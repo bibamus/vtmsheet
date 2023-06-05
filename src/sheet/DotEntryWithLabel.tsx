@@ -2,6 +2,7 @@ import React, {useContext, useEffect} from "react";
 import DotEntry from "./DotEntry";
 import Grid from "@mui/material/Unstable_Grid2";
 import {MarkValueContext} from "../App";
+import {SearchItemType} from "../topbar/SearchItems";
 
 interface DotEntryWithLabelProps {
     label: string;
@@ -9,7 +10,7 @@ interface DotEntryWithLabelProps {
     currValue: number;
     setFunction: (value: number) => void;
     markSelector?: {
-        type: string,
+        type: SearchItemType,
         value: string
     }
 }

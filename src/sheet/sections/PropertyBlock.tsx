@@ -4,6 +4,7 @@ import Character from "../../model/Character";
 import {capitalizeFirstLetter} from "../../Helper";
 import {CharacterAction} from "../../state/CharacterReducer";
 import Grid from "@mui/material/Unstable_Grid2";
+import {SearchItemType} from "../../topbar/SearchItems";
 
 interface PropertyBlockProps {
     label: string;
@@ -32,7 +33,7 @@ export default function PropertyBlock({
                                                               property: property,
                                                               value: value
                                                           })}
-                                                          markSelector={{type: "stat", value: property}}/>)
+                                                          markSelector={{type: SearchItemType.STAT, value: property}}/>)
         }
     </Grid>;
 }
