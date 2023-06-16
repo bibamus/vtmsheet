@@ -18,13 +18,15 @@ export default function HeaderSection({character, characterDispatch}: CharacterP
     }
 
     return <>
+
+
         <Grid xs={4}>
-            <Grid container>
+            <Grid container paddingLeft={0}>
                 <Grid xs={6}>
                     <label className={"label"}>Name</label>
                 </Grid>
                 <Grid xs={6}>
-                    <input className={"full-width"} value={character.characterName}
+                    <input  value={character.characterName}
                            onChange={event => characterDispatch({
                                type: "setProperty",
                                property: "characterName",
@@ -58,7 +60,7 @@ export default function HeaderSection({character, characterDispatch}: CharacterP
         </Grid>
 
         <Grid xs={4}>
-            <Grid container>
+            <Grid container paddingLeft={0}>
                 <Grid xs={6}>
                     <label className={"label"}>Nature</label>
                 </Grid>
@@ -93,8 +95,9 @@ export default function HeaderSection({character, characterDispatch}: CharacterP
                 </Grid>
             </Grid>
         </Grid>
+
         <Grid xs={4}>
-            <Grid container>
+            <Grid container paddingLeft={0}>
                 <Grid xs={6}>
                     <label className={"label"}>Clan</label>
                 </Grid>
